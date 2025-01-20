@@ -43,28 +43,33 @@ class _UsuarioDetailScreenState extends State<UsuarioDetailScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            GestureDetector(
-              onTap: () => showDialog(
-                context: context,
-                builder: (context) => Dialog(
-                  child: Image.asset(
-                    'assets/avatars/${widget.usuario.avatar}.png',
-                    fit: BoxFit.contain,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (context) => Dialog(
+                      child: Image.network(
+                        widget.usuario.avatar,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) => Icon(Icons.person, size: 100),
+                      ),
+                    ),
+                  ),
+                  child: ClipOval(
+                    child: Image.network(
+                      widget.usuario.avatar,
+                      width: 180,
+                      height: 180,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Icon(Icons.person, size: 100),
+                    ),
                   ),
                 ),
-              ),
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/avatars/${widget.usuario.avatar}.png',
-                  width: 180,
-                  height: 180,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+             
+          
+
             const SizedBox(height: 20),
             IconButton(
               icon: Icon(

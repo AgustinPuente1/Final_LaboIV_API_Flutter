@@ -44,30 +44,32 @@ class UsuariosCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            ClipOval(
-              child: Image.asset(
-                'assets/avatars/$avatar.png',
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-              ),
+          ClipOval(
+            child: Image.network(
+              avatar,
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => Icon(Icons.person),
             ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    firstName,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  firstName,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(lastName),
-                ],
-              ),
+                ),
+                Text(lastName),
+              ],
+            ),
+          
             ),
             Icon(
               gender == "Male" ? Icons.male : Icons.female,

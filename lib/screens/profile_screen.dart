@@ -74,4 +74,5 @@ class HeaderProfile extends StatelessWidget {
       ),
     );
   }
+
 }

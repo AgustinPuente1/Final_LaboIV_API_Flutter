@@ -16,6 +16,19 @@ class Usuario {
     required this.email,
     required this.gender,
     required this.country,
-    this.isFavorite = false,
+    required this.isFavorite,
   });
+
+  factory Usuario.fromJson(Map<String, dynamic> json) {
+    return Usuario(
+      id: json['id'],
+      avatar: json['avatar'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      email: json['email'],
+      gender: json['gender'],
+      country: json['country'],
+      isFavorite: json['is_favorite'],
+    );
+  }
 }

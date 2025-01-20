@@ -82,23 +82,25 @@ class _CustomListScreenState extends State<CustomListScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color.fromARGB(31, 206, 219, 246),
-                        blurRadius: 0,
-                        spreadRadius: 3,
-                        offset: Offset(0, 6))
-                  ]),
+                borderRadius: BorderRadius.circular(1),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromARGB(31, 206, 219, 246),
+                    blurRadius: 0,
+                    spreadRadius: 3,
+                    offset: Offset(0, 6),
+                  ),
+                ],
+              ),
               child: Row(
                 children: [
-                  Image.asset(
-                      'assets/avatars/${_auxiliarElements[index][0]}.png',
-                      width: 50,
-                      height: 50),
-                  const SizedBox(
-                    width: 10,
+                  Image.network(
+                    _auxiliarElements[index][0],
+                    width: 50,
+                    height: 50,
+                    errorBuilder: (context, error, stackTrace) => Icon(Icons.person),
                   ),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +109,9 @@ class _CustomListScreenState extends State<CustomListScreen> {
                         Text(
                           _auxiliarElements[index][1],
                           style: const TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         Text(_auxiliarElements[index][2]),
                       ],
@@ -116,9 +120,11 @@ class _CustomListScreenState extends State<CustomListScreen> {
                   Icon(_auxiliarElements[index][4]
                       ? Icons.star
                       : Icons.star_border_outlined),
-                  Text(_auxiliarElements[index][3].toString())
+                  Text(_auxiliarElements[index][3].toString()),
                 ],
               ),
+            
+          
             ),
           );
         },

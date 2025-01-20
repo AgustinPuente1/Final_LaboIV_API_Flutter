@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:tp2_flutter_grupo12/models/usuarios_model.dart';
 import 'package:tp2_flutter_grupo12/screens/usuarios_details_screen.dart';
+import 'package:tp2_flutter_grupo12/service/api_service.dart';
 import 'package:tp2_flutter_grupo12/service/usuarios_favorites_manager.dart';
 import 'package:tp2_flutter_grupo12/widgets/widgets.dart';
 import 'package:tp2_flutter_grupo12/mocks/usuarios_mock.dart' show elements; // Importar el nuevo archivo
 
 class UsuariosListScreen extends StatefulWidget {
-  const UsuariosListScreen({super.key});
+  final List<Usuario> initialUsuarios;
+
+  const UsuariosListScreen({super.key, required this.initialUsuarios});
 
   @override
   State<UsuariosListScreen> createState() => _UsuariosListScreenState();
 }
 
 class _UsuariosListScreenState extends State<UsuariosListScreen> {
-  List<Usuario> _originalElements = []; // Lista fija con todos los usuarios
-  List<Usuario> _auxiliarElements = []; // Lista filtrada para la UI
+  List<Usuario> _originalElements = [];
+  List<Usuario> _auxiliarElements = [];
   String _searchQuery = '';
   bool _searchActive = false;
-  bool _showOnlyFavorites = false; // Estado para saber si mostrar solo favoritos
+  bool _showOnlyFavorites = false;
 
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
@@ -25,24 +28,26 @@ class _UsuariosListScreenState extends State<UsuariosListScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeUsuarios();
-    _loadFavorites(); // Cargar favoritos desde SharedPreferences
+    _originalElements = widget.initialUsuarios;
+    _auxiliarElements = List.from(_originalElements);
+    _loadFavorites();
   }
 
-  void _initializeUsuarios() {
-    _originalElements = elements.map((element) {
-      return Usuario(
-        id: element[0],
-        avatar: element[1],
-        firstName: element[2],
-        lastName: element[3],
-        email: element[4],
-        gender: element[5],
-        country: element[6],
-        isFavorite: element[7], 
-      );
-    }).toList();
-    _auxiliarElements = List.from(_originalElements); // Copia para la UI
+  void _initializeUsuarios() async {
+    try {
+      final apiService = ApiService();
+      final usuarios = await apiService.fetchUsers();
+
+      setState(() {
+        _originalElements = usuarios;
+        _auxiliarElements = List.from(_originalElements); // Copia para la UI
+      });
+
+      // Cargar favoritos una vez que los usuarios se hayan cargado
+      _loadFavorites();
+    } catch (e) {
+      print('Error al cargar los usuarios desde la API: $e');
+    }
   }
 
   // Cargar los favoritos desde SharedPreferences
