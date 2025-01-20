@@ -1,15 +1,23 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoritesManager {
-  // Cargar el estado de favoritos desde SharedPreferences
-  static Future<bool> loadFavorite(String userId) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('favorite_$userId') ?? false; // Devuelve false si no se encuentra
+  static const String favoritesKeyPrefix = 'favorite_';
+
+  static Future<bool> loadFavorite(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('$favoritesKeyPrefix$id') ?? false;
   }
 
-  // Guardar el estado de favoritos en SharedPreferences
-  static Future<void> saveFavorite(String userId, bool isFavorite) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('favorite_$userId', isFavorite);
+  static Future<void> saveFavorite(String id, bool isFavorite) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('$favoritesKeyPrefix$id', isFavorite);
+  }
+
+  static Future<void> clearAllFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final keys = prefs.getKeys().where((key) => key.startsWith(favoritesKeyPrefix));
+    for (final key in keys) {
+      await prefs.remove(key);
+    }
   }
 }

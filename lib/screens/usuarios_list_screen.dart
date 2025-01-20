@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tp2_flutter_grupo12/models/usuarios_model.dart';
 import 'package:tp2_flutter_grupo12/screens/usuarios_details_screen.dart';
-import 'package:tp2_flutter_grupo12/service/api_service.dart';
 import 'package:tp2_flutter_grupo12/service/usuarios_favorites_manager.dart';
-import 'package:tp2_flutter_grupo12/widgets/widgets.dart';
-import 'package:tp2_flutter_grupo12/mocks/usuarios_mock.dart' show elements; // Importar el nuevo archivo
+import 'package:tp2_flutter_grupo12/widgets/widgets.dart'; 
 
 class UsuariosListScreen extends StatefulWidget {
   final List<Usuario> initialUsuarios;
@@ -30,24 +28,6 @@ class _UsuariosListScreenState extends State<UsuariosListScreen> {
     super.initState();
     _originalElements = widget.initialUsuarios;
     _auxiliarElements = List.from(_originalElements);
-    _loadFavorites();
-  }
-
-  void _initializeUsuarios() async {
-    try {
-      final apiService = ApiService();
-      final usuarios = await apiService.fetchUsers();
-
-      setState(() {
-        _originalElements = usuarios;
-        _auxiliarElements = List.from(_originalElements); // Copia para la UI
-      });
-
-      // Cargar favoritos una vez que los usuarios se hayan cargado
-      _loadFavorites();
-    } catch (e) {
-      print('Error al cargar los usuarios desde la API: $e');
-    }
   }
 
   // Cargar los favoritos desde SharedPreferences
