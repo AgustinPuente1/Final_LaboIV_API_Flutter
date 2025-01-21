@@ -40,7 +40,7 @@ dependencies:
   #env
   flutter_dotenv: ^5.0.2
 
-  #api
+  #Peticiones HTTP
   http: ^1.0.0
 
 dev_dependencies:
@@ -70,6 +70,7 @@ flutter:
     - assets/images/
     - assets/avatars/ 
     - assets/flags/
+    - .env
 
 
   # To add assets to your application, add an assets section, like this:

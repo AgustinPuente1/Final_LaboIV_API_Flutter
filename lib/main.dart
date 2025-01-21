@@ -6,10 +6,12 @@ import 'package:tp2_flutter_grupo12/helpers/preferences.dart';
 import 'package:tp2_flutter_grupo12/providers/theme_provider.dart';
 import 'package:tp2_flutter_grupo12/service/api_service.dart';
 import 'package:tp2_flutter_grupo12/service/usuarios_favorites_manager.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Preferences.initShared();
+  await dotenv.load(fileName: ".env");
 
   // Limpiar favoritos al inicio
   await FavoritesManager.clearAllFavorites();
