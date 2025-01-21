@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class DrawerMenu extends StatelessWidget {
   final List<Map<String, String>> _menuItems = <Map<String, String>>[
-    {'route': 'home', 'title': 'Home', 'subtitle': 'Home + counter app'},
-    {'route': 'custom_list', 'title': 'Custom list', 'subtitle': ''},
-    {'route': 'profile', 'title': 'Perfil usuario', 'subtitle': ''},
+    {'route': 'home', 'title': 'Home', 'subtitle': 'Ir a Screen Principal'},
+    {'route': 'profile', 'title': 'Perfil usuario', 'subtitle': 'Ir a Perfil de Usuario'},
     {'route': 'usuarios_list', 'title': 'Usuarios list', 'subtitle': 'Ir a la lista de Usuarios'},
   ];
 
@@ -111,7 +110,7 @@ class _DrawerHeader extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Grupo 12',
+                  'Puente Agustín',
                   style: TextStyle(
                     fontSize: 16,
                     color: Theme.of(context).brightness == Brightness.dark

@@ -46,9 +46,7 @@ class MyApp extends StatelessWidget {
           themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
           routes: {
             'home': (context) => const HomeScreen(),
-            'custom_list': (context) => const CustomListScreen(),
             'profile': (context) => const ProfileScreen(),
-            'custom_list_item': (context) => const CustomListItem(),
             'usuarios_list': (context) => UsuariosListScreen(initialUsuarios: initialUsuarios),
           },
         );

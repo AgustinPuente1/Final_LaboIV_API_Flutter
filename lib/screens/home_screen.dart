@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center, 
             children: [
               const Text(
-                'Laboratorio 4 Grupo 12',
+                'Laboratorio 4',
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -31,34 +31,23 @@ class HomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
+                'Proyecto Aprobación Directa',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 68, 255, 146), 
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
                 'Universidad Tecnológica Nacional (UTN)',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w400,
-                  color: Colors.black54,
+                  color: Color.fromARGB(137, 232, 69, 69),
                 ),
               ),
               const SizedBox(height: 30),
-              _buildTeamMember(
-                context,
-                'Balot Luciano', 
-                'Películas', 
-                Colors.orangeAccent,  
-                () {
-                  // Ruta Lucho
-                },
-              ),
-              const SizedBox(height: 20),
-              _buildTeamMember(
-                context,
-                'Miqueleiz Tomas',
-                'Jugadores de Fútbol', 
-                Colors.greenAccent, 
-                () {
-                  // Ruta Mike
-                },
-              ),
-              const SizedBox(height: 20),
               _buildTeamMember(
                 context,
                 'Puente Agustín', 
